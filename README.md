@@ -3,10 +3,6 @@ Here, you will find interfacing of various kind of sensors with ATmega16. I am u
 
 <h2><strong>INTRODUCTION TO AVR PROGRAMMING WITH PROTEUS</strong></h2>
 <br></br>
-
-<br></br>
-
-<br></br>
 <h4><span style="text-decoration:underline;">P1: INTERFACING LED WITH
 ATMEGA16</span></h4>
 <p>
