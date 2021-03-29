@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Atmel Studio Solution File, Format Version 11.00
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "P10_IR_Sensor_DC_Motors", "P10_IR_Sensor_DC_Motors\P10_IR_Sensor_DC_Motors.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "P11_IR_Sensor_DC_Motors", "P10_IR_Sensor_DC_Motors\P11_IR_Sensor_DC_Motors.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "P11_LineFollower_v1", "P11_LineFollower_v1\P11_LineFollower_v1.cproj", "{363D2C27-0E9E-40FC-B923-06A11A4CEBE0}"
 EndProject
