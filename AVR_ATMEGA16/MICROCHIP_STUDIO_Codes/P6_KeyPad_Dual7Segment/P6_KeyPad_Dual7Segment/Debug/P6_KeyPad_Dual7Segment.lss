@@ -1,0 +1,328 @@
+
+P6_KeyPad_Dual7Segment.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001f4  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000014  00800060  000001f4  00000268  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000027c  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002ac  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000028  00000000  00000000  000002e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000749  00000000  00000000  00000310  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000626  00000000  00000000  00000a59  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000003b6  00000000  00000000  0000107f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000044  00000000  00000000  00001438  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000397  00000000  00000000  0000147c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000131  00000000  00000000  00001813  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000018  00000000  00000000  00001944  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e4 ef       	ldi	r30, 0xF4	; 244
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a4 37       	cpi	r26, 0x74	; 116
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 c6 00 	call	0x18c	; 0x18c <main>
+  7a:	0c 94 f8 00 	jmp	0x1f0	; 0x1f0 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <key>:
+
+
+int key()
+{
+	while (1) {
+		PORTB = 0b01111111; _delay_ms(20);
+  82:	8f e7       	ldi	r24, 0x7F	; 127
+  84:	88 bb       	out	0x18, r24	; 24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  86:	87 e8       	ldi	r24, 0x87	; 135
+  88:	93 e1       	ldi	r25, 0x13	; 19
+  8a:	01 97       	sbiw	r24, 0x01	; 1
+  8c:	f1 f7       	brne	.-4      	; 0x8a <key+0x8>
+  8e:	00 c0       	rjmp	.+0      	; 0x90 <key+0xe>
+  90:	00 00       	nop
+		
+		if (PINA == 0xfe) { while (PINA == 0xfe); return  1;}
+  92:	89 b3       	in	r24, 0x19	; 25
+  94:	8e 3f       	cpi	r24, 0xFE	; 254
+  96:	31 f4       	brne	.+12     	; 0xa4 <key+0x22>
+  98:	89 b3       	in	r24, 0x19	; 25
+  9a:	8e 3f       	cpi	r24, 0xFE	; 254
+  9c:	e9 f3       	breq	.-6      	; 0x98 <key+0x16>
+  9e:	81 e0       	ldi	r24, 0x01	; 1
+  a0:	90 e0       	ldi	r25, 0x00	; 0
+  a2:	08 95       	ret
+		
+		if (PINA == 0xfd) { while (PINA == 0xfd); return  4;}
+  a4:	89 b3       	in	r24, 0x19	; 25
+  a6:	8d 3f       	cpi	r24, 0xFD	; 253
+  a8:	31 f4       	brne	.+12     	; 0xb6 <key+0x34>
+  aa:	89 b3       	in	r24, 0x19	; 25
+  ac:	8d 3f       	cpi	r24, 0xFD	; 253
+  ae:	e9 f3       	breq	.-6      	; 0xaa <key+0x28>
+  b0:	84 e0       	ldi	r24, 0x04	; 4
+  b2:	90 e0       	ldi	r25, 0x00	; 0
+  b4:	08 95       	ret
+		
+		if (PINA == 0xfb) { while (PINA == 0xfb); return  7;}
+  b6:	89 b3       	in	r24, 0x19	; 25
+  b8:	8b 3f       	cpi	r24, 0xFB	; 251
+  ba:	31 f4       	brne	.+12     	; 0xc8 <key+0x46>
+  bc:	89 b3       	in	r24, 0x19	; 25
+  be:	8b 3f       	cpi	r24, 0xFB	; 251
+  c0:	e9 f3       	breq	.-6      	; 0xbc <key+0x3a>
+  c2:	87 e0       	ldi	r24, 0x07	; 7
+  c4:	90 e0       	ldi	r25, 0x00	; 0
+  c6:	08 95       	ret
+		
+		if (PINA == 0xf7) { while (PINA == 0xf7); return 10;}
+  c8:	89 b3       	in	r24, 0x19	; 25
+  ca:	87 3f       	cpi	r24, 0xF7	; 247
+  cc:	31 f4       	brne	.+12     	; 0xda <key+0x58>
+  ce:	89 b3       	in	r24, 0x19	; 25
+  d0:	87 3f       	cpi	r24, 0xF7	; 247
+  d2:	e9 f3       	breq	.-6      	; 0xce <key+0x4c>
+  d4:	8a e0       	ldi	r24, 0x0A	; 10
+  d6:	90 e0       	ldi	r25, 0x00	; 0
+  d8:	08 95       	ret
+		
+		PORTB = 0b10111111; _delay_ms(20);
+  da:	8f eb       	ldi	r24, 0xBF	; 191
+  dc:	88 bb       	out	0x18, r24	; 24
+  de:	87 e8       	ldi	r24, 0x87	; 135
+  e0:	93 e1       	ldi	r25, 0x13	; 19
+  e2:	01 97       	sbiw	r24, 0x01	; 1
+  e4:	f1 f7       	brne	.-4      	; 0xe2 <key+0x60>
+  e6:	00 c0       	rjmp	.+0      	; 0xe8 <key+0x66>
+  e8:	00 00       	nop
+		
+		if (PINA == 0xfe) { while (PINA == 0xfe); return  2;}
+  ea:	89 b3       	in	r24, 0x19	; 25
+  ec:	8e 3f       	cpi	r24, 0xFE	; 254
+  ee:	31 f4       	brne	.+12     	; 0xfc <key+0x7a>
+  f0:	89 b3       	in	r24, 0x19	; 25
+  f2:	8e 3f       	cpi	r24, 0xFE	; 254
+  f4:	e9 f3       	breq	.-6      	; 0xf0 <key+0x6e>
+  f6:	82 e0       	ldi	r24, 0x02	; 2
+  f8:	90 e0       	ldi	r25, 0x00	; 0
+  fa:	08 95       	ret
+		
+		if (PINA== 0xfd) { while (PINA == 0xfd); return  5;}
+  fc:	89 b3       	in	r24, 0x19	; 25
+  fe:	8d 3f       	cpi	r24, 0xFD	; 253
+ 100:	31 f4       	brne	.+12     	; 0x10e <key+0x8c>
+ 102:	89 b3       	in	r24, 0x19	; 25
+ 104:	8d 3f       	cpi	r24, 0xFD	; 253
+ 106:	e9 f3       	breq	.-6      	; 0x102 <key+0x80>
+ 108:	85 e0       	ldi	r24, 0x05	; 5
+ 10a:	90 e0       	ldi	r25, 0x00	; 0
+ 10c:	08 95       	ret
+		
+		if (PINA == 0xfb) { while (PINA == 0xfb); return  8;}
+ 10e:	89 b3       	in	r24, 0x19	; 25
+ 110:	8b 3f       	cpi	r24, 0xFB	; 251
+ 112:	31 f4       	brne	.+12     	; 0x120 <key+0x9e>
+ 114:	89 b3       	in	r24, 0x19	; 25
+ 116:	8b 3f       	cpi	r24, 0xFB	; 251
+ 118:	e9 f3       	breq	.-6      	; 0x114 <key+0x92>
+ 11a:	88 e0       	ldi	r24, 0x08	; 8
+ 11c:	90 e0       	ldi	r25, 0x00	; 0
+ 11e:	08 95       	ret
+		
+		if (PINA == 0xf7) { while (PINA == 0xf7); return 11;}
+ 120:	89 b3       	in	r24, 0x19	; 25
+ 122:	87 3f       	cpi	r24, 0xF7	; 247
+ 124:	31 f4       	brne	.+12     	; 0x132 <key+0xb0>
+ 126:	89 b3       	in	r24, 0x19	; 25
+ 128:	87 3f       	cpi	r24, 0xF7	; 247
+ 12a:	e9 f3       	breq	.-6      	; 0x126 <key+0xa4>
+ 12c:	8b e0       	ldi	r24, 0x0B	; 11
+ 12e:	90 e0       	ldi	r25, 0x00	; 0
+ 130:	08 95       	ret
+		
+		PORTB = 0b11011111; _delay_ms(30);
+ 132:	8f ed       	ldi	r24, 0xDF	; 223
+ 134:	88 bb       	out	0x18, r24	; 24
+ 136:	8b e4       	ldi	r24, 0x4B	; 75
+ 138:	9d e1       	ldi	r25, 0x1D	; 29
+ 13a:	01 97       	sbiw	r24, 0x01	; 1
+ 13c:	f1 f7       	brne	.-4      	; 0x13a <key+0xb8>
+ 13e:	00 c0       	rjmp	.+0      	; 0x140 <key+0xbe>
+ 140:	00 00       	nop
+		
+		if (PINA == 0xfe) { while (PINA == 0xfe); return  3;}
+ 142:	89 b3       	in	r24, 0x19	; 25
+ 144:	8e 3f       	cpi	r24, 0xFE	; 254
+ 146:	31 f4       	brne	.+12     	; 0x154 <key+0xd2>
+ 148:	89 b3       	in	r24, 0x19	; 25
+ 14a:	8e 3f       	cpi	r24, 0xFE	; 254
+ 14c:	e9 f3       	breq	.-6      	; 0x148 <key+0xc6>
+ 14e:	83 e0       	ldi	r24, 0x03	; 3
+ 150:	90 e0       	ldi	r25, 0x00	; 0
+ 152:	08 95       	ret
+		
+		if (PINA == 0xfd) { while (PINA == 0xfd); return  6;}
+ 154:	89 b3       	in	r24, 0x19	; 25
+ 156:	8d 3f       	cpi	r24, 0xFD	; 253
+ 158:	31 f4       	brne	.+12     	; 0x166 <key+0xe4>
+ 15a:	89 b3       	in	r24, 0x19	; 25
+ 15c:	8d 3f       	cpi	r24, 0xFD	; 253
+ 15e:	e9 f3       	breq	.-6      	; 0x15a <key+0xd8>
+ 160:	86 e0       	ldi	r24, 0x06	; 6
+ 162:	90 e0       	ldi	r25, 0x00	; 0
+ 164:	08 95       	ret
+		
+		if (PINA == 0xfb) { while (PINA == 0xfb); return  9;}
+ 166:	89 b3       	in	r24, 0x19	; 25
+ 168:	8b 3f       	cpi	r24, 0xFB	; 251
+ 16a:	31 f4       	brne	.+12     	; 0x178 <key+0xf6>
+ 16c:	89 b3       	in	r24, 0x19	; 25
+ 16e:	8b 3f       	cpi	r24, 0xFB	; 251
+ 170:	e9 f3       	breq	.-6      	; 0x16c <key+0xea>
+ 172:	89 e0       	ldi	r24, 0x09	; 9
+ 174:	90 e0       	ldi	r25, 0x00	; 0
+ 176:	08 95       	ret
+		
+		if (PINA == 0xf7) { while (PINA == 0xf7); return 12;}
+ 178:	89 b3       	in	r24, 0x19	; 25
+ 17a:	87 3f       	cpi	r24, 0xF7	; 247
+ 17c:	09 f0       	breq	.+2      	; 0x180 <key+0xfe>
+ 17e:	81 cf       	rjmp	.-254    	; 0x82 <key>
+ 180:	89 b3       	in	r24, 0x19	; 25
+ 182:	87 3f       	cpi	r24, 0xF7	; 247
+ 184:	e9 f3       	breq	.-6      	; 0x180 <key+0xfe>
+ 186:	8c e0       	ldi	r24, 0x0C	; 12
+ 188:	90 e0       	ldi	r25, 0x00	; 0
+	} }
+ 18a:	08 95       	ret
+
+0000018c <main>:
+
+
+int main(void)
+{	
+ 18c:	cf 93       	push	r28
+ 18e:	df 93       	push	r29
+ 190:	cd b7       	in	r28, 0x3d	; 61
+ 192:	de b7       	in	r29, 0x3e	; 62
+ 194:	64 97       	sbiw	r28, 0x14	; 20
+ 196:	0f b6       	in	r0, 0x3f	; 63
+ 198:	f8 94       	cli
+ 19a:	de bf       	out	0x3e, r29	; 62
+ 19c:	0f be       	out	0x3f, r0	; 63
+ 19e:	cd bf       	out	0x3d, r28	; 61
+	DC = DD =DDRB = 0xff;
+ 1a0:	8f ef       	ldi	r24, 0xFF	; 255
+ 1a2:	87 bb       	out	0x17, r24	; 23
+ 1a4:	81 bb       	out	0x11, r24	; 17
+ 1a6:	84 bb       	out	0x14, r24	; 20
+	DDRA = 0xf0; PORTA = 0xff;
+ 1a8:	90 ef       	ldi	r25, 0xF0	; 240
+ 1aa:	9a bb       	out	0x1a, r25	; 26
+ 1ac:	8b bb       	out	0x1b, r24	; 27
+    int a[10] = {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
+ 1ae:	84 e1       	ldi	r24, 0x14	; 20
+ 1b0:	e0 e6       	ldi	r30, 0x60	; 96
+ 1b2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b4:	de 01       	movw	r26, r28
+ 1b6:	11 96       	adiw	r26, 0x01	; 1
+ 1b8:	01 90       	ld	r0, Z+
+ 1ba:	0d 92       	st	X+, r0
+ 1bc:	8a 95       	dec	r24
+ 1be:	e1 f7       	brne	.-8      	; 0x1b8 <main+0x2c>
+		
+    while (1) 
+    {
+		int num = key();
+ 1c0:	0e 94 41 00 	call	0x82	; 0x82 <key>
+		if (num<10)
+ 1c4:	8a 30       	cpi	r24, 0x0A	; 10
+ 1c6:	91 05       	cpc	r25, r1
+ 1c8:	dc f7       	brge	.-10     	; 0x1c0 <main+0x34>
+		{ 
+			PD = 0b11111110;
+ 1ca:	2e ef       	ldi	r18, 0xFE	; 254
+ 1cc:	22 bb       	out	0x12, r18	; 18
+			PC = a[num];_delay_ms(10);
+ 1ce:	88 0f       	add	r24, r24
+ 1d0:	99 1f       	adc	r25, r25
+ 1d2:	e1 e0       	ldi	r30, 0x01	; 1
+ 1d4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1d6:	ec 0f       	add	r30, r28
+ 1d8:	fd 1f       	adc	r31, r29
+ 1da:	e8 0f       	add	r30, r24
+ 1dc:	f9 1f       	adc	r31, r25
+ 1de:	80 81       	ld	r24, Z
+ 1e0:	85 bb       	out	0x15, r24	; 21
+ 1e2:	83 ec       	ldi	r24, 0xC3	; 195
+ 1e4:	99 e0       	ldi	r25, 0x09	; 9
+ 1e6:	01 97       	sbiw	r24, 0x01	; 1
+ 1e8:	f1 f7       	brne	.-4      	; 0x1e6 <main+0x5a>
+ 1ea:	00 c0       	rjmp	.+0      	; 0x1ec <main+0x60>
+ 1ec:	00 00       	nop
+ 1ee:	e8 cf       	rjmp	.-48     	; 0x1c0 <main+0x34>
+
+000001f0 <_exit>:
+ 1f0:	f8 94       	cli
+
+000001f2 <__stop_program>:
+ 1f2:	ff cf       	rjmp	.-2      	; 0x1f2 <__stop_program>
